@@ -38,6 +38,11 @@ VOLUME /comics
 # Copy out the auto processing scripts to the config directory
 RUN cp -R /opt/mylar/post-processing/ /config/
 
+# Add edge.sh to execute during container startup
+RUN mkdir -p /etc/my_init.d
+ADD edge.sh /etc/my_init.d/edge.sh
+RUN chmod +x /etc/my_init.d/edge.sh
+
 # Add mylar to runit
 RUN mkdir /etc/service/mylar
 ADD mylar.sh /etc/service/mylar/run
